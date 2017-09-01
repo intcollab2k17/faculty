@@ -57,6 +57,7 @@
                   
                     <p>
                        Enter your account details below:
+
                     </p>
                     <div class="form-group">
                       <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
@@ -104,10 +105,13 @@
                 </div>				
                 
 
-                <div class="col-md-5 col-sm-5 sidebar2">
+                <div class="col-md-5 col-sm-5 sidebar2 well">
                   <!-- BEGIN LOGIN FORM -->
                     <form class="login-form" action="login.php" method="post">
                       <h3 class="form-title">Login to your account</h3>
+                      <p>
+                       Enter login details below:
+                    </p>
                       <div class="alert alert-danger display-hide">
                         <button class="close" data-close="alert"></button>
                         <span>

@@ -100,48 +100,66 @@ Demo.init(); // init demo features
 									<div class="portlet-body">
 										<div class="tab-content">
 											<!-- PERSONAL INFO TAB -->
+											<?php
+												$queryf=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Father'")or die(mysqli_error($con));
+                    									$rowf=mysqli_fetch_array($queryf);
+											?>
+											<?php
+												$querym=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Mother'")or die(mysqli_error($con));
+                    									$rowm=mysqli_fetch_array($querym);
+											?>
 											<div class="tab-pane active" id="tab_1_1">
 												<form role="form" action="family_update.php" method="post">
 													<div class="row">
 														<div class="col-md-4">
 															<div class="form-group">
 																<label class="control-label">Father's Surname</label>
-																<input placeholder="Write your father's last name" class="form-control" type="text" name="flast" value="<?php echo $rowf['flast'];?>">
+																<input placeholder="Write your father's last name" class="form-control" type="text" name="last[]" value="<?php echo $rowf['last'];?>">
+																<input class="form-control" type="hidden" name="relationship[]" value="Father">
+																<input class="form-control" type="hidden" name="fid[]" value="<?php echo $rowf['fam_id'];?>">
 															</div>
 														</div>
 														<div class="col-md-4">
 																<div class="form-group">
 																<label class="control-label">First Name</label>
-																<input placeholder="Write your father's first name" class="form-control" type="text" name="ffirst" value="<?php echo $rowf['ffirst'];?>">
+																<input placeholder="Write your father's first name" class="form-control" type="text" name="first[]" value="<?php echo $rowf['first'];?>">
 															</div>
 														</div>
 													
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label">Middle Name</label>
-																<input placeholder="Write your father's middle name" class="form-control" type="text" name="fmiddle" value="<?php echo $rowf['fmiddle'];?>">
+																<input placeholder="Write your father's middle name" class="form-control" type="text" name="middle[]" value="<?php echo $rowf['middle'];?>">
 															</div>
 														</div>
+														<div class="col-md-1">
+															<div class="form-group">
+															<label class="control-label">Ext</label>
+															<input placeholder="Jr" class="form-control" type="text" name="ext" value="<?php echo $rowf['ext'];?>">
+														</div>
+													</div>
 													</div>	
 													<div class="row">
 														<div class="col-md-4">
 															<div class="form-group">
 																<label class="control-label">Mother's Surname</label>
-																<input placeholder="Write your mother's last name" class="form-control" type="text" name="mlast" value="<?php echo $rowf['mlast'];?>">
+																<input placeholder="Write your mother's last name" class="form-control" type="text" name="last[]" value="<?php echo $rowm['last'];?>">
 															</div>
 														</div>
 														<div class="col-md-4">
 																<div class="form-group">
 																<label class="control-label">First Name</label>
-																<input placeholder="Write your mother's first name" class="form-control" type="text" name="mfirst" value="<?php echo $rowf['mfirst'];?>">
+																<input placeholder="Write your mother's first name" class="form-control" type="text" name="first[]" value="<?php echo $rowm['first'];?>">
 															</div>
 														</div>
 													
 														<div class="col-md-4">
 															<div class="form-group">
 																<label class="control-label">Middle Name</label>
-																<input placeholder="Write your mother's middle name" class="form-control" type="text" name="mmiddle" value="<?php echo $rowf['mmiddle'];?>">
+																<input placeholder="Write your mother's middle name" class="form-control" type="text" name="middle[]" value="<?php echo $rowm['middle'];?>">
 															</div>
+															<input class="form-control" type="hidden" name="relationship[]" value="Mother">
+															<input class="form-control" type="hidden" name="fid[]" value="<?php echo $rowm['fam_id'];?>">
 														</div>
 													</div>		
 													
@@ -160,60 +178,123 @@ Demo.init(); // init demo features
 												<!-- END PERSONAL INFO TAB -->
 												<!-- CHANGE AVATAR TAB -->
 												<div class="tab-pane" id="tab_1_2">
-													<form action="address_update.php" role="form" method="post">
-														<div class="row">
-														<div class="col-md-4">
+													<form action="spouse_update.php" role="form" method="post">
+<?php
+												$querys=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Spouse'")or die(mysqli_error($con));
+                    									$rows=mysqli_fetch_array($querys);
+											?>													
+													<div class="row">
+														<div class="col-md-3">
 															<div class="form-group">
-																<label class="control-label">Father's Surname</label>
-																<input placeholder="Write your father's last name" class="form-control" type="text" name="flast" value="<?php echo $rowf['flast'];?>">
+																<label class="control-label">Spouse Surname</label>
+																<input placeholder="Write your Spouse's last name" class="form-control" type="text" name="slast" value="<?php echo $rows['last'];?>">
 															</div>
 														</div>
-														<div class="col-md-4">
-																<div class="form-group">
+														<div class="col-md-3">
+															<div class="form-group">
 																<label class="control-label">First Name</label>
-																<input placeholder="Write your father's first name" class="form-control" type="text" name="ffirst" value="<?php echo $rowf['ffirst'];?>">
+																<input placeholder="Write your spouse's first name" class="form-control" type="text" name="sfirst value="<?php echo $rows['first'];?>">
 															</div>
 														</div>
 													
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label">Middle Name</label>
-																<input placeholder="Write your father's middle name" class="form-control" type="text" name="fmiddle" value="<?php echo $rowf['fmiddle'];?>">
+																<input placeholder="Write your spouse's middle name" class="form-control" type="text" name="smiddle" value="<?php echo $rows['middle'];?>">
+																<input type="hidden" name="sfid" value="<?php echo $rows['fam_id'];?>">
+																<input type="hidden" name="srelationship" value="Spouse">
 															</div>
 														</div>
-													</div>	
-													<div class="row">
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<div class="form-group">
-																<label class="control-label">Mother's Surname</label>
-																<input placeholder="Write your mother's last name" class="form-control" type="text" name="mlast" value="<?php echo $rowf['mlast'];?>">
+																<label class="control-label">Ext</label>
+																<input placeholder="Jr" class="form-control" type="text" name="sext" value="<?php echo $rows['ext'];?>">
 															</div>
 														</div>
-														<div class="col-md-4">
+													</div>
+													<div class="row">
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="control-label">Occupation</label>
+																<input placeholder="Write your Spouse's Occupation" class="form-control" type="text" name="occupation" value="<?php echo $rows['occupation'];?>">
+															</div>
+														</div>
+														<div class="col-md-3">
 																<div class="form-group">
-																<label class="control-label">First Name</label>
-																<input placeholder="Write your mother's first name" class="form-control" type="text" name="mfirst" value="<?php echo $rowf['mfirst'];?>">
+																<label class="control-label">Employer/Business Name</label>
+																<input placeholder="Write your spouse's Employer/Business Name" class="form-control" type="text" name="emp_bus" value="<?php echo $rows['emp_bus'];?>">
 															</div>
 														</div>
 													
-														<div class="col-md-4">
+														<div class="col-md-3">
 															<div class="form-group">
-																<label class="control-label">Middle Name</label>
-																<input placeholder="Write your mother's middle name" class="form-control" type="text" name="mmiddle" value="<?php echo $rowf['mmiddle'];?>">
+																<label class="control-label">Business Address</label>
+																<input placeholder="Write your spouse's middle name" class="form-control" type="text" name="bus_address" value="<?php echo $rows['bus_address'];?>">
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="form-group">
+																<label class="control-label">Contact</label>
+																<input placeholder="Contact #" class="form-control" type="text" name="contact" value="<?php echo $rows['contact'];?>">
+															</div>
+														</div>
+													</div><hr>
+														
+<?php
+												$queryc=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Child'")or die(mysqli_error($con));
+                    									while($rowc=mysqli_fetch_array($queryc)){
+											?>		
+																										<div class='row'>
+														<div class='col-md-3'>
+															<div class='form-group'>
+																<label class='control-label'>Child's Surname</label>
+																<input placeholder='Write your child's last name' class='form-control' type='text' name='last[]' value="<?php echo $rowc['last'];?>">
+																<input type="hidden" name="fid[]" value="<?php echo $rowc['fam_id'];?>" required>
+															</div>
+														</div>
+														<div class='col-md-3'>
+																<div class='form-group'>
+																<label class='control-label'>First Name</label>
+																<input placeholder='Write your childs's first name' class='form-control' type='text' name='first[]' value="<?php echo $rowc['first'];?>" required>
+															</div>
+														</div>
+													
+														<div class='col-md-2'>
+															<div class='form-group'>
+																<label class='control-label'>Middle Name</label>
+																<input placeholder='Write your child's middle name' class='form-control' type='text' name='middle[]' value="<?php echo $rowc['middle'];?>">
+															</div>
+														</div>
+														<div class='col-md-1'>
+															<div class='form-group'>
+																<label class='control-label'>Ext</label>
+																<input placeholder='Jr/Sr' class='form-control' type='text' name='ext[]' value="<?php echo $rowc['ext'];?>">
+															</div>
+														</div>
+														<div class='col-md-3'>
+															<div class='form-group'>
+																<label class='control-label'>Birthday</label>
+																<input placeholder='Write your child's middle name' class='form-control' type='date' name='bday[]' value="<?php echo $rowc['bday'];?>">
 															</div>
 														</div>
 													</div>	
+												<?php }?>												
+													<hr>
+													
 													<div class="row">
 														<div class="col-md-4">
-															<div class="margiv-top-10">
+															<div class="margin-top-10">
 																<button class="btn green-haze" name="profile">
 																Save Changes </button>
 																<a href="javascript:;" class="btn default">
 																Cancel </a>
 															</div>
 														</div>
+														<div class="col-md-4">
+															<input type="button" class="btn btn-success pull-right" value="Add Child/Children" onClick="addInput('dynamicInput');">
+														</div>
 													</div>
-
+													<div id="dynamicInput">
 												</form>
 											<!-- CHANGE PASSWORD TAB -->
 											
@@ -330,6 +411,21 @@ jQuery(document).ready(function() {
 	Profile.init(); // init page demo
 });
 </script>
+<script>
+		var counter = 1;
+		var limit = 25;
+		function addInput(divName){
+			 if (counter == limit)  {
+				  alert("You have reached the limit of adding " + counter + " inputs");
+			 }
+			 else {
+				  var newdiv = document.createElement('div');
+				  newdiv.innerHTML ="<div class='row'> <div class='col-md-3'> <div class='form-group'> <label class='control-label'>Child's Surname</label> <input placeholder='Write your child's last name' class='form-control' type='text' name='clast[]' required> </div> </div> <div class='col-md-3'> <div class='form-group'> <label class='control-label'>First Name</label> <input placeholder='Write your childs's first name' class='form-control' type='text' name='cfirst[]' required> </div> </div> <div class='col-md-2'> <div class='form-group'> <label class='control-label'>Middle Name</label> <input placeholder='Write your child's middle name' class='form-control' type='text' name='cmiddle[]'> </div> </div> <div class='col-md-1'> <div class='form-group'> <label class='control-label'>Ext</label> <input placeholder='Jr' class='form-control' type='text' name='cext[]'> </div> </div> <input type='hidden' name='relationship[]' value='Child'> <div class='col-md-3'> <div class='form-group'> <label class='control-label'>Birthday</label> <input placeholder='Birthday' class='form-control' type='date' name='cbday[]'> </div> </div> </div><hr>";
+				  document.getElementById(divName).appendChild(newdiv);
+				  counter++;
+			 }
+		}
+	</script>
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

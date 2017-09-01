@@ -93,7 +93,7 @@ Demo.init(); // init demo features
 												<a aria-expanded="true" href="#tab_1_1" data-toggle="tab">Personal Info</a>
 											</li>
 											<li class="">
-												<a aria-expanded="false" href="#tab_1_2" data-toggle="tab">Address</a>
+												<a aria-expanded="false" href="#tab_1_2" data-toggle="tab">Address/Others</a>
 											</li>
 										</ul>
 									</div>
@@ -183,13 +183,13 @@ Demo.init(); // init demo features
 												<div class="row">
 													<div class="col-md-4">
 														<div class="form-group">
-															<label class="control-label">Height</label>
+															<label class="control-label">Height (m)</label>
 															<input placeholder="Write Height in centimeters" class="form-control" type="text" name="height" value="<?php echo $row['height'];?>">
 														</div>
 													</div>
 													<div class="col-md-4">
 														<div class="form-group">
-															<label class="control-label">Weight</label>
+															<label class="control-label">Weight (kg)</label>
 															<input placeholder="Write weight in kilograms" class="form-control" type="text" name="weight" value="<?php echo $row['weight'];?>">
 														</div>
 													</div>

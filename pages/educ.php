@@ -87,46 +87,111 @@ Demo.init(); // init demo features
 										<div class="caption caption-md">
 											<i class="icon-globe theme-font hide"></i>
 											<span class="caption-subject font-blue-madison bold uppercase">Educational Background</span>
+											
+												<a class="btn btn-warning pull-right" data-toggle="modal" href="#full">Add School </a>
+											
 										</div>
-									
 									</div>
 									<div class="portlet-body">
 										<div class="tab-content">
-											<!-- PERSONAL INFO TAB -->
+											<!-- EDUCATIONAL BACKGROUND -->
 											<div class="tab-pane active" id="tab_1_1">
-												<form role="form" action="educ_update.php" method="post">
+												
+												<form action="educ_update.php" method="post">
 <?php 
  $queryeduc=mysqli_query($con,"select * from educ where faculty_id='$id'")or die(mysqli_error());
                    while($rowe=mysqli_fetch_array($queryeduc)){
 
 
-?>                   
+?>                   								
+												<div class="row" style="text-align: center;">
+														<div class="col-md-12 alert alert-info" style="height:50px">
+															<div class="form-group">
+																<input class="form-control" type="hidden" name="eid[]" value="<?php echo $rowe['educ_id'];?>">
+																<b><?php echo $rowe['level'];?></b>
+															</div>
+														</div>
+													</div>
+												<div class="row"><h6 class="text-primary">
+														<div class="col-md-4">
+															SCHOOL
+														</div>
+														<div class="col-md-4">
+															BASIC EDUCATION/DEGREE/COURSE<br>(Write in full)
+														</div>
+														<div class="col-md-2">
+															PERIOD OF ATTENDACE<br>From 
+														</div>
+														<div class="col-md-2">
+															To
+														</div></h6>
+												</div>
+
 													<div class="row">
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="control-label"></label>
+																<textarea placeholder="Name of School" class="form-control" type="text" name="school[]"><?php echo $rowe['school'];?></textarea>
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="control-label"></label>
+																<textarea placeholder="" class="form-control" type="text" name="course[]"><?php echo $rowe['course'];?></textarea>
+															</div>
+														</div>
 														<div class="col-md-3">
 															<div class="form-group">
-																<label class="control-label">Level</label>
-																<input class="form-control" type="hidden" name="eid[]" value="<?php echo $rowe['educ_id'];?>">
-																<input placeholder="Level" class="form-control" type="text" name="level[]" value="<?php echo $rowe['level'];?>">
+																<label class="control-label"></label>
+																<input placeholder="Attendance Date" class="form-control" type="date" name="from[]" value="<?php echo $rowe['at_from'];?>">
 															</div>
 														</div>
-														<div class="col-md-7">
-																<div class="form-group">
-																<label class="control-label">School Name</label>
-																<input placeholder="Name of School" class="form-control" type="text" name="school[]" value="<?php echo $rowe['school'];?>">
-															</div>
-														</div>
-													
-														<div class="col-md-2">
+														<div class="col-md-3">
 															<div class="form-group">
-																<label class="control-label">Year Graduated</label>
-																<input placeholder="Year Graduated" class="form-control" type="text" name="grad[]" value="<?php echo $rowe['grad'];?>">
+																<label class="control-label"></label>
+																<input placeholder="Attendance Date" class="form-control" type="date" name="to[]" value="<?php echo $rowe['at_to'];?>">
 															</div>
 														</div>
 													</div>	
-<?php }?>														
-													
-													<div class="row">
+
+													<div class="row"><h6 class="text-primary">
+														
+														<div class="col-md-6">
+															HIGHEST LEVEL/UNITS EARNED       
+(if not graduated
+														</div>
+														<div class="col-md-2">
+															YEAR GRADUATED
+														</div>
 														<div class="col-md-4">
+															SCHOLARSHIP/ACADEMIC HONORS RECEIVED
+														</div></h6>
+												</div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="form-group">
+																<label class="control-label"></label>
+																<input class="form-control" type="text" name="level_units[]" value="<?php echo $rowe['level_units'];?>">
+															</div>
+														</div>
+														<div class="col-md-2">
+															<div class="form-group">
+																<label class="control-label"></label>
+																<input class="form-control" type="text" name="grad[]" value="<?php echo $rowe['grad'];?>">
+															</div>
+														</div>
+														<div class="col-md-4">
+															<div class="form-group">
+																<label class="control-label"></label>
+																<input class="form-control" type="text" name="honors[]" value="<?php echo $rowe['honors'];?>">
+															</div>
+														</div>
+													</div>	<hr>
+													
+<?php }?>														
+													<div id="dynamicInput">
+													<div class="row">
+														<div class="col-md-6">
 															<div class="margiv-top-10">
 																<button class="btn green-haze" name="profile">
 																Save Changes </button>
@@ -134,13 +199,16 @@ Demo.init(); // init demo features
 																Cancel </a>
 															</div>
 														</div>
+														
 													</div>
 													</form>
-												</div>
-												<!-- END PERSONAL INFO TAB -->
+											</div>
+</div>
+											<!-- END PERSONAL INFO TAB -->
+										</div>		
+									</div>			
+									</div>
 												
-											
-										</div>
 									</div>
 								</div>
 							</div>
@@ -157,20 +225,54 @@ Demo.init(); // init demo features
 </div>
 <!-- END PAGE CONTAINER -->
 <!-- BEGIN PRE-FOOTER -->
-<div class="modal fade draggable-modal" id="seminar" tabindex="-1" role="basic" aria-hidden="true">
+<div class="modal fade draggable-modal" id="full" tabindex="-1" role="basic" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-											<h4 class="modal-title">Add New Seminar Attended</h4>
+											<h4 class="modal-title">Add New School</h4>
 										</div>
 
 										<div class="modal-body">
-										<form method="post" action="seminar_add.php">			
-								 				 <div class="form-group">
-														<label class="control-label">Seminar Name</label>
-														<input placeholder="Write Seminar Name" class="form-control" type="text" name="seminar">
-													</div>
+										<form method="post" action="educ_add.php">			
+								 			<div class='form-group'> 
+												<label class='control-label'>Level</label> 
+												<select placeholder='Level' class='form-control' name='level'> 
+													<option>Vocational/Trade Course</option> 
+													<option>Graduate Studies</option> </select> 
+											</div>
+											<div class='form-group'>
+																<label class='control-label'>Name of School</label>
+																<textarea placeholder='Name of School' class='form-control' type='text' name='school'></textarea>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>BASIC EDUCATION/DEGREE/COURSE (Write in full)</label>
+																<textarea placeholder='' class='form-control' type='text' name='course'></textarea>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>PERIOD OF ATTENDACE
+From</label>
+																<input placeholder='Attendance Date' class='form-control' type='date' name='from'>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>To</label>
+																<input placeholder='Attendance Date' class='form-control' type='date' name='to'>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>HIGHEST LEVEL/UNITS EARNED (if not graduated</label>
+																<input class='form-control' type='text' name='level_units'>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>YEAR GRADUATED</label>
+																<input class='form-control' type='number' name='grad'>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>SCHOLARSHIP/ACADEMIC HONORS RECEIVED
+
+</label>
+																<input class='form-control' type='text' name='honors'>
+															</div>
+
 							
 										</div>
 										<div class="modal-footer">
@@ -184,33 +286,7 @@ Demo.init(); // init demo features
 								<!-- /.modal-dialog -->
 							</div>
 							<!-- /.modal -->
-<div class="modal fade draggable-modal" id="work" tabindex="-1" role="basic" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-											<h4 class="modal-title">Add New Work Experience</h4>
-										</div>
 
-										<div class="modal-body">
-										<form method="post" action="work_add.php">			
-								 				 <div class="form-group">
-														<label class="control-label">Agency Name</label>
-														<input placeholder="Write Agency Name" class="form-control" type="text" name="agency">
-													</div>
-							
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn default" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn blue">Save changes</button>
-										</div>
-									</div>
-									</form>
-									<!-- /.modal-content -->
-								</div>
-								<!-- /.modal-dialog -->
-							</div>
-							<!-- /.modal -->
 
 <?php include('../includes/footer.php');?>
 <!-- END FOOTER -->
@@ -253,6 +329,7 @@ jQuery(document).ready(function() {
 	Profile.init(); // init page demo
 });
 </script>
+
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

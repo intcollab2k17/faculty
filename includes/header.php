@@ -62,8 +62,4 @@ error_reporting(0);
                   $id=$_SESSION['id'];
                   $query=mysqli_query($con,"select * from faculty where faculty_id='$id'")or die(mysqli_error());
                     $row=mysqli_fetch_array($query);
-
-                  $queryfam=mysqli_query($con,"select * from family where faculty_id='$id'")or die(mysqli_error());
-                    $rowf=mysqli_fetch_array($queryfam);
-                        
-              ?>
+?>
