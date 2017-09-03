@@ -54,6 +54,8 @@ include('../includes/dbcon.php');
 		$ii++;
 	}
 
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+	
 	echo "<script type='text/javascript'>alert('Successfully updated spouse/child details!');</script>";
 	echo "<script>document.location='family.php'</script>"; 
 	

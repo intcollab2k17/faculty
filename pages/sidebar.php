@@ -20,43 +20,48 @@
 								<ul class="nav">
 									<li class="active">
 										<a href="profile.php">
-										<i class="icon-home"></i>
+										<i class="icon-tag"></i>
 										Personal Information </a>
 									</li>
 									<li>
 										<a href="family.php">
-										<i class="icon-settings"></i>
+										<i class="icon-users"></i>
 										Family Background </a>
 									</li>
 									<li>
 										<a href="educ.php">
-										<i class="icon-settings"></i>
+										<i class="icon-graduation"></i>
 										Educational Background</a>
 									</li>
 									<li>
 										<a href="eligibility.php">
-										<i class="icon-settings"></i>
+										<i class="icon-badge"></i>
 										Civil Service Eligibility</a>
 									</li>
 									<li>
 										<a href="work_exp.php">
-										<i class="icon-settings"></i>
+										<i class="icon-briefcase"></i>
 										Work Experience</a>
 									</li>
 									<li>
 										<a href="voluntary.php">
-										<i class="icon-settings"></i>
-										Voluntary Work/Involvement</a>
+										<i class="icon-briefcase"></i>
+										Voluntary Work</a>
 									</li>
 									<li>
 										<a href="training.php">
-										<i class="icon-settings"></i>
+										<i class="icon-list"></i>
 										Training Programs</a>
 									</li>
 									<li>
 										<a href="skills.php">
-										<i class="icon-settings"></i>
+										<i class="icon-trophy"></i>
 										Other Information</a>
+									</li>	
+									<li>
+										<a href="pds.php">
+										<i class="icon-printer"></i>
+										View PDS</a>
 									</li>	
 								</ul>
 							</div>

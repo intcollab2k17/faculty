@@ -54,11 +54,29 @@
                       </div>
                     </div>
                     
+                    
                   
                     <p>
                        Enter your account details below:
 
                     </p>
+                    <div class="form-group">
+                      <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
+                      <label class="control-label visible-ie8 visible-ie9">Department</label>
+                      <div class="input-icon">
+                        <i class="fa fa-calendar"></i>
+                         <select class="form-control select2" style="width: 100%;" name="dept" required>
+                <?php
+
+                    include('includes/dbcon.php');
+                  $query2=mysqli_query($con,"select * from dept")or die(mysqli_error($con));
+                      while($row2=mysqli_fetch_array($query2)){
+                ?>
+                      <option value="<?php echo $row2['dept_code'];?>"><?php echo $row2['dept_title'];?></option>
+                <?php }?>
+                </select>
+                      </div>
+                    </div>
                     <div class="form-group">
                       <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
                       <label class="control-label visible-ie8 visible-ie9">Email</label>

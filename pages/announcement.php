@@ -18,6 +18,7 @@
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="../assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css"/>
 <link href="../assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
+<link href="../assets/admin/pages/css/timeline.css" rel="stylesheet" type="text/css"/>
 <link href="../assets/admin/pages/css/tasks.css" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL STYLES -->
 <!-- BEGIN THEME STYLES -->
@@ -91,29 +92,45 @@ Demo.init(); // init demo features
 										
 									</div>
 									<div class="portlet-body">
-										<div class="tab-content">
-											<!-- CHANGE AVATAR TAB -->
-											<div class="tab-pane active" id="tab_1_1">
-												<form action="account_update.php" role="form" method="post" enctype="multipart/form-data">
-												<?php 
+										
+					<div class="timeline">
+						<?php 
 												include('../includes/dbcon.php');
 												$id=$_SESSION['id'];
 												$query=mysqli_query($con,"select * from announcement order by date_posted desc")or die(mysqli_error($con));
 														while ($row=mysqli_fetch_array($query))
 															{		
 												?>
-												<div class="alert alert-info">	
-													<h4><?php echo $row['announcement'];?>
-													</h4>
-													<span><?php echo date("M d, Y h:i a",strtotime($row['date_posted']));?></span>
-												</div>
-												
-	
-												<?php }?>	
-												</form>
-											</div>
-											<!-- END PRIVACY SETTINGS TAB -->
-										</div>
+						<!-- TIMELINE ITEM -->
+						<div class="timeline-item">
+							<div class="timeline-badge">
+								<div class="timeline-icon">
+									<i class="icon-bell font-green-haze"></i>
+								</div>
+							</div>
+							<div class="timeline-body">
+								<div class="timeline-body-arrow">
+								</div>
+								<div class="timeline-body-head">
+									<div class="timeline-body-head-caption">
+										<span class="timeline-body-alerttitle font-red-intense">Announcements</span>
+										<span class="timeline-body-time font-grey-cascade">at <?php echo date("M d, Y h:i a",strtotime($row['date_posted']));?></span>
+									</div>
+									
+								</div>
+								<div class="timeline-body-content">
+									<span class="font-grey-cascade">
+									<?php echo $row['announcement'];?>
+									</span>
+								</div>
+							</div>
+						</div>
+						<!-- END TIMELINE ITEM -->
+						<?php }?>
+					</div>
+				</div>
+				<!--portlet end timeline-->
+										
 									</div>
 								</div>
 							</div>
@@ -160,7 +177,7 @@ Demo.init(); // init demo features
 <!-- END PAGE LEVEL SCRIPTS -->
 <script src="../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="../assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
-
+<script src="../assets/admin/pages/scripts/timeline.js" type="text/javascript"></script>
 <script>
 jQuery(document).ready(function() {       
    	// initiate layout and plugins

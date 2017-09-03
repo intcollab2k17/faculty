@@ -14,8 +14,12 @@ include('../includes/dbcon.php');
 	$bday = $_POST['bday'];
 	$citizenship = $_POST['citizenship'];
 	$id=$_SESSION['id'];
+	$date=date('Y-m-d');
 	
 	mysqli_query($con,"update faculty set faculty_last='$last',faculty_first='$first',faculty_middle='$middle',faculty_ext='$ext',gender='$gender',civil='$civil',height='$height',weight='$weight',pob='$pob',citizenship='$citizenship',blood_type='$blood_type',bday='$bday' where faculty_id='$id'")or die(mysqli_error($con));  
+
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+	
 	echo "<script type='text/javascript'>alert('Successfully updated personal details!');</script>";
 	echo "<script>document.location='profile.php'</script>";   
 	

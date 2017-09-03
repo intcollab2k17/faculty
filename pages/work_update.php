@@ -11,6 +11,7 @@ include('../includes/dbcon.php');
 	$grade = $_POST['grade'];
 	$status = $_POST['status'];
 	$govt = $_POST['govt'];
+	$date=date('Y-m-d');
 	$cid = $_POST['id'];
 	$i=0;
 	foreach($cid as $value)
@@ -20,5 +21,7 @@ include('../includes/dbcon.php');
 
 		$i++;
 	}
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+	
 	echo "<script>document.location='work_exp.php'</script>";   
 ?>	

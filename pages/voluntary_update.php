@@ -9,6 +9,7 @@ include('../includes/dbcon.php');
 	$name = $_POST['name'];
 	$address = $_POST['address'];
 	$hours = $_POST['hours'];
+	$date=date('Y-m-d');
 	$cid = $_POST['id'];
 	$i=0;
 	foreach($cid as $value)
@@ -18,5 +19,7 @@ include('../includes/dbcon.php');
 
 		$i++;
 	}
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+	
 	echo "<script>document.location='voluntary.php'</script>";   
 ?>	

@@ -99,22 +99,24 @@ Demo.init(); // init demo features
 									</div>
 									<div class="portlet-body">
 										<div class="tab-content">
+
 											<!-- PERSONAL INFO TAB -->
-											<?php
-												$queryf=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Father'")or die(mysqli_error($con));
-                    									$rowf=mysqli_fetch_array($queryf);
-											?>
-											<?php
-												$querym=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Mother'")or die(mysqli_error($con));
-                    									$rowm=mysqli_fetch_array($querym);
-											?>
+											
+											
 											<div class="tab-pane active" id="tab_1_1">
+												<div class="row">
+													<a class="btn btn-warning pull-right" data-toggle="modal" href="#full">Add Parent </a>
+												</div>
 												<form role="form" action="family_update.php" method="post">
+<?php
+												$queryf=mysqli_query($con,"select * from family where faculty_id='$id' and relationship='Father' or relationship='Mother'")or die(mysqli_error($con));
+                    									while($rowf=mysqli_fetch_array($queryf)){
+											?>												
 													<div class="row">
 														<div class="col-md-4">
 															<div class="form-group">
 																<label class="control-label">Father's Surname</label>
-																<input placeholder="Write your father's last name" class="form-control" type="text" name="last[]" value="<?php echo $rowf['last'];?>">
+																<input placeholder="Write your father's last name" class="form-control" type="text" name="last[]" value="<?php echo $rowf['last'];?>" required>
 																<input class="form-control" type="hidden" name="relationship[]" value="Father">
 																<input class="form-control" type="hidden" name="fid[]" value="<?php echo $rowf['fam_id'];?>">
 															</div>
@@ -122,7 +124,7 @@ Demo.init(); // init demo features
 														<div class="col-md-4">
 																<div class="form-group">
 																<label class="control-label">First Name</label>
-																<input placeholder="Write your father's first name" class="form-control" type="text" name="first[]" value="<?php echo $rowf['first'];?>">
+																<input placeholder="Write your father's first name" class="form-control" type="text" name="first[]" value="<?php echo $rowf['first'];?>" required>
 															</div>
 														</div>
 													
@@ -139,29 +141,8 @@ Demo.init(); // init demo features
 														</div>
 													</div>
 													</div>	
-													<div class="row">
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Mother's Surname</label>
-																<input placeholder="Write your mother's last name" class="form-control" type="text" name="last[]" value="<?php echo $rowm['last'];?>">
-															</div>
-														</div>
-														<div class="col-md-4">
-																<div class="form-group">
-																<label class="control-label">First Name</label>
-																<input placeholder="Write your mother's first name" class="form-control" type="text" name="first[]" value="<?php echo $rowm['first'];?>">
-															</div>
-														</div>
+													<?php }?>
 													
-														<div class="col-md-4">
-															<div class="form-group">
-																<label class="control-label">Middle Name</label>
-																<input placeholder="Write your mother's middle name" class="form-control" type="text" name="middle[]" value="<?php echo $rowm['middle'];?>">
-															</div>
-															<input class="form-control" type="hidden" name="relationship[]" value="Mother">
-															<input class="form-control" type="hidden" name="fid[]" value="<?php echo $rowm['fam_id'];?>">
-														</div>
-													</div>		
 													
 													<div class="row">
 														<div class="col-md-4">
@@ -193,7 +174,7 @@ Demo.init(); // init demo features
 														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label">First Name</label>
-																<input placeholder="Write your spouse's first name" class="form-control" type="text" name="sfirst value="<?php echo $rows['first'];?>">
+																<input placeholder="Write your spouse's first name" class="form-control" type="text" name="sfirst" value="<?php echo $rows['first'];?>">
 															</div>
 														</div>
 													
@@ -369,7 +350,54 @@ Demo.init(); // init demo features
 								<!-- /.modal-dialog -->
 							</div>
 							<!-- /.modal -->
+<!-- BEGIN PRE-FOOTER -->
+<div class="modal fade draggable-modal" id="full" tabindex="-1" role="basic" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+											<h4 class="modal-title">Add Parent</h4>
+										</div>
 
+										<div class="modal-body">
+										<form method="post" action="family_add.php">			
+								 			
+											<div class='form-group'>
+																<label class='control-label'>Surname</label>
+																<input type="text" placeholder='Last Name' class='form-control' type='text' name='last' required>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>First Name</label>
+																<input type="text" placeholder='First Name' class='form-control' type='text' name='first' required>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>Middle Name</label>
+																<input type="text" placeholder='Middle Name' class='form-control' type='text' name='middle'>
+															</div>
+											<div class='form-group'>
+																<label class='control-label'>Ext</label>
+																<input type="text" placeholder='Extension (Jr ,Sr) Name' class='form-control' type='text' name='ext'>
+															</div>
+											<div class='form-group'> 
+												<label class='control-label'>Relationship</label> 
+												<select placeholder='Level' class='form-control' name='relationship'> 
+													<option>Father</option> 
+													<option>Mother</option> </select> 
+											</div>
+
+							
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn default" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn blue">Save changes</button>
+										</div>
+										</form>
+									</div>
+									<!-- /.modal-content -->
+								</div>
+								<!-- /.modal-dialog -->
+							</div>
+							<!-- /.modal -->
 <?php include('../includes/footer.php');?>
 <!-- END FOOTER -->
 <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->

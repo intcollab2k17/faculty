@@ -33,17 +33,17 @@
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">Height <span class="">
+													<label class="control-label col-md-3">Height (m)<span class="">
 													 </span>
 													</label>
 													<div class="col-md-4">
 														<input type="text" class="form-control" name="height"/>
 														<span class="help-block">
-														Provide your height in centemeter (cm)</span>
+														Provide your height in centemeter (m)</span>
 													</div>
 												</div>
 												<div class="form-group">
-													<label class="control-label col-md-3">Weight <span class="">
+													<label class="control-label col-md-3">Weight (kg) <span class="">
 													 </span>
 													</label>
 													<div class="col-md-4">

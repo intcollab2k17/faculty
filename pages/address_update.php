@@ -16,8 +16,13 @@ include('../includes/dbcon.php');
 	$sss = $_POST['sss'];
 	$tin = $_POST['tin'];
 	$id=$_SESSION['id'];
+	$date=date('Y-m-d');
 	
-	mysqli_query($con,"update faculty set res_address='$raddress',res_zip='$rzip',res_tel='$rtel',perm_address='$paddress',perm_zip='$pzip',perm_tel='$ptel',email='$email',contact='$contact',gsis='$gsis',pagibig='$pagibig',philhealth='$philhealth',sss='$sss',tin='$tin' where faculty_id='$id'")or die(mysqli_error($con));  
+	mysqli_query($con,"update faculty set res_address='$raddress',res_zip='$rzip',res_tel='$rtel',perm_address='$paddress',perm_zip='$pzip',perm_tel='$ptel',email='$email',contact='$contact',gsis='$gsis',pagibig='$pagibig',philhealth='$philhealth',sss='$sss',tin='$tin' where faculty_id='$id'")or die(mysqli_error($con));
+
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+
+
 	echo "<script type='text/javascript'>alert('Successfully updated contact details!');</script>";
 	echo "<script>document.location='profile.php'</script>";   
 	

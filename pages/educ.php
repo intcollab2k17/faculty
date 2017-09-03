@@ -143,13 +143,13 @@ Demo.init(); // init demo features
 														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label"></label>
-																<input placeholder="Attendance Date" class="form-control" type="date" name="from[]" value="<?php echo $rowe['at_from'];?>">
+																<input placeholder="Attendance Date" class="form-control" type="number" name="from[]" value="<?php echo $rowe['at_from'];?>">
 															</div>
 														</div>
 														<div class="col-md-3">
 															<div class="form-group">
 																<label class="control-label"></label>
-																<input placeholder="Attendance Date" class="form-control" type="date" name="to[]" value="<?php echo $rowe['at_to'];?>">
+																<input placeholder="Attendance Date" class="form-control" type="number" name="to[]" value="<?php echo $rowe['at_to'];?>">
 															</div>
 														</div>
 													</div>	
@@ -252,11 +252,11 @@ Demo.init(); // init demo features
 											<div class='form-group'>
 																<label class='control-label'>PERIOD OF ATTENDACE
 From</label>
-																<input placeholder='Attendance Date' class='form-control' type='date' name='from'>
+																<input placeholder='Attendance Date' class='form-control' type='number' name='from'>
 															</div>
 											<div class='form-group'>
 																<label class='control-label'>To</label>
-																<input placeholder='Attendance Date' class='form-control' type='date' name='to'>
+																<input placeholder='Attendance Date' class='form-control' type='number' name='to'>
 															</div>
 											<div class='form-group'>
 																<label class='control-label'>HIGHEST LEVEL/UNITS EARNED (if not graduated</label>

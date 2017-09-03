@@ -67,7 +67,9 @@
                       <tr>
                         <th>Last Name</th>
                         <th>First Name</th>
+                        <th>Department</th>
                         <th>Registration Date</th>
+                        <th>Status</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -133,15 +135,51 @@ include('../dist/includes/dbcon.php');
         </div>
       </div>
  </div>
-               <!--end of modal-->                              
+               <!--end of modal-->     
+<div id="status<?php echo $id;?>" class="modal modal-primary fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Update Status of Faculty</h4>
+                      </div>
+                      <div class="modal-body">
+                      <form class="form-horizontal" method="post" action="status_update.php">
+                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                        <p>Accept registration request of <?php echo $first." ".$last;?></p> 
+                        <div class='form-group'> 
+                          <label class='control-label'>Status</label> 
+                          <select placeholder='Status' class='form-control' name='status'> 
+                            <option>Active</option> 
+                            <option>Inactive</option> 
+                          </select> 
+                        </div>
+                                           
+                                    </div>    
+                                    <!--end of modal body-->
+                                    <div class="modal-footer">
+                                      <button type="submit" name="update" class="btn btn-primary">Save</button>
+                                      <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                    </div>
+                      </div>
+                      <!--end of modal content-->
+                </form>
+        </div>
+      </div>
+ </div>
+               <!--end of modal-->  
                       <tr>
                         <td><?php echo $last;?></td>
                         <td><?php echo $first;?></td>
+                        <td><?php echo $row['dept_code'];?></td>
                         <td><?php echo date("M d, Y h:i a",strtotime($date));?></td>
+                        <td><?php echo $row['inactive'];?></td>
                         <td><button class="btn btn-primary" data-target="#approve<?php echo $id;?>" data-toggle="modal">
                                 Approve
                             </button>
                          <button class="btn btn-danger" data-target="#del<?php echo $id;?>" data-toggle="modal">Deny</button>
+                         <button class="btn btn-success" data-target="#status<?php echo $id;?>" data-toggle="modal">Change Status</button>
+                         <a href="pds.php?id=<?php echo $id;?>" class="btn btn-warning">Print</a>
             </td>
                       </tr>
                       
@@ -151,6 +189,7 @@ include('../dist/includes/dbcon.php');
                       <tr>
                         <th>Last Name</th>
                         <th>First Name</th>
+                        <th>Department</th>
                         <th>Registration Date</th>
                         <th>Action</th>
                       </tr>

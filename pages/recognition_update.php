@@ -5,6 +5,7 @@ include('../includes/dbcon.php');
 
 	$recognition = $_POST['recognition'];
 	$cid = $_POST['id'];
+	$date=date('Y-m-d');
 	$i=0;
 	foreach($cid as $value)
 	{
@@ -13,5 +14,7 @@ include('../includes/dbcon.php');
 
 		$i++;
 	}
+	mysqli_query($con,"update faculty set last_update='$date' where faculty_id='$id'")or die(mysqli_error($con));  
+	
 	echo "<script>document.location='skills.php'</script>";   
 ?>	

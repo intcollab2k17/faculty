@@ -7,6 +7,7 @@ include('includes/dbcon.php');
 	$bday1 = $_POST['bday'];
 	$pass = $_POST['pass'];
 	$email = $_POST['email'];
+	$dept = $_POST['dept'];
 	$date=date("Y-m-d");
 
 	$bday=date("Y-m-d",strtotime($bday1));
@@ -21,7 +22,7 @@ include('includes/dbcon.php');
 				}
 			else
 			{
-					mysqli_query($con,"INSERT INTO faculty(faculty_last,faculty_first,faculty_pic,email,password,reg_date,bday) VALUES('$last','$first','default.gif','$email','$pass','$date','$bday1')")or die(mysqli_error($con));
+					mysqli_query($con,"INSERT INTO faculty(faculty_last,faculty_first,faculty_pic,email,password,reg_date,bday,dept_code) VALUES('$last','$first','default.gif','$email','$pass','$date','$bday1','$dept')")or die(mysqli_error($con));
 				
 
 						 ini_set( 'display_errors', 1 );
