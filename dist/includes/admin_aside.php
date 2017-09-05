@@ -41,7 +41,7 @@
               <ul class="treeview-menu menu-open" style="display: none;">
                 <li><a href="inactive.php"><i class="glyphicon glyphicon-stats"></i> Faculty (Inactive)</a></li>
                 <li><a href="active.php"><i class="glyphicon glyphicon-stats"></i> Faculty (Active)</a></li>
-                <li><a href="statistics.php"><i class="glyphicon glyphicon-stats"></i> Statistic</a></li>
+                <li><a href="statistics.php"><i class="glyphicon glyphicon-stats"></i> Statistic By Department</a></li>
               </ul>
             </li>
           </ul>

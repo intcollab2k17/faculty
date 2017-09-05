@@ -24,7 +24,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
-
+    <style type="text/css">
+      
+    </style>
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
@@ -55,59 +57,48 @@
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
               
 
               <div class="box">
                 <div class="box-header">
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <div id="graph" style="width: 90%"></div>
+                  <div id="graph"></div>
                   <table id="" class="table table-bordered table-striped">
                     <thead>
                       <tr>
-                        <th colspan="4"><h3 style="text-align: center;">List of Active Faculty</3></th>
+                        <th colspan="4"><h3 style="text-align: center;">Active Faculty By Department</3></th>
                       </tr>
                       <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
                         <th>Department</th>
-                        <th>Registration Date</th>
+                        <th>Count</th>
                       </tr>
                     </thead>
                     <tbody>
 <?php
 include('../dist/includes/dbcon.php');
 
-    $query=mysqli_query($con,"select * from faculty where status='1' and inactive='Active' order by reg_date")or die(mysqli_error());
+    $query=mysqli_query($con,"SELECT dept,COUNT(*) as count FROM faculty natural join dept
+ where status='1' and inactive='Active' group by dept")or die(mysqli_error());
       while ($row=mysqli_fetch_array($query)){
-        $id=$row['faculty_id'];
-        $last=$row['faculty_last'];
-        $date=$row['reg_date'];
-        $first=$row['faculty_first'];
+       
+        $dept=$row['dept'];
+        $count=$row['count'];
 ?>
 
     
                       <tr>
-                        <td><?php echo $last;?></td>
-                        <td><?php echo $first;?></td>
-                        <td><?php echo $row['dept_code'];?></td>
-                        <td><?php echo date("M d, Y h:i a",strtotime($date));?></td>
-                       
+                        <td><?php echo $dept;?></td>
+                        <td><?php echo $count;?></td>
+                        
+
                      
                       </tr>
                       
 <?php }?>                     
                     </tbody>
-                    <tfoot>
-                      <tr>
-                        <th>Last Name</th>
-                        <th>First Name</th>
-                        <th>Department</th>
-                        <th>Registration Date</th>
-                        
-                      </tr>
-                    </tfoot>
+                   
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -151,71 +142,60 @@ include('../dist/includes/dbcon.php');
         });
       });
     </script>
-    <script src="js/highcharts.js"></script> <!-- chart -->
-<script src="js/exporting.js"></script> <!-- chart-->
+    <script src="highcharts.js"></script> <!-- chart -->
+<script src="exporting.js"></script> <!-- chart-->
 <script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-      var options = {
-              chart: {
-                  renderTo: 'graph',
-                  type: 'column',
-                  marginRight: 10,
-                  marginBottom: 25
-                
-              },
-              title: {
-                  text: '',
-                  x: -20 //center
-              },
-              subtitle: {
-                  text: '',
-                  x: -10
-              },
-              xAxis: {
-                  categories: []
-              },
-              yAxis: {
-                  
-                  title: {
-                      text: 'Total Monthly Reservations'
-                  },
-                  plotLines: [{
-                      value: 0,
-                      width: 1,
-                      color: '#808080'
-                  }]
-              },
-              tooltip: {
-                  formatter: function() {
-                          return '<b>'+ this.series.name +'</b><br/>'+  Highcharts.numberFormat(this.y, 0)
-                          this.x +': '+ this.y
-                          
-                  ;
-                  }
-              },
-              legend: {
-                  layout: 'vertical',
-                  align: 'right',
-                  verticalAlign: 'top',
-                  x: 0,
-                  y: 100,
-                  borderWidth: 0
-              },
-              series: []
-          }
-          
-          $.getJSON("data_reserve.php", function(json) {
-      options.xAxis.categories = json[0]['name'];
-            options.series[0] = json[1];
-            //options.series[1] = json[2];
+ <script type="text/javascript">
+        $(document).ready(function() {
+            var options = {
+                chart: {
+                    renderTo: 'graph',
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    spacingBottom: 50,
+                    spacingLeft: 35
+                },
+                title: {
+                    text: '',
+                    style: { fontFamily: '\'Lato\', sans-serif', lineHeight: '10px', fontSize: '10px' }
+                },
+                tooltip: {
+                    formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage, 2) +' %';
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            color: '#000000',
+                            style: { fontFamily: '\'Lato\', sans-serif', lineHeight: '10px', fontSize: '10px' },
+                            connectorColor: '#000000',
+                            formatter: function() {
+                                return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.percentage, 2) +' %';
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '',
+                    data: []
+                }]
+            }
+            
+            $.getJSON("data_dept.php", function(json) {
+                options.series[0].data = json;
+                chart = new Highcharts.Chart(options);
+            });
             
             
             
-            chart = new Highcharts.Chart(options);
-          });
-      });
-    </script>
+        });   
+        </script>
   </body>
 </html>
 

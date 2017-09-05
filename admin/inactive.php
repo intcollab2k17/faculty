@@ -78,7 +78,7 @@
 <?php
 include('../dist/includes/dbcon.php');
 
-    $query=mysqli_query($con,"select * from faculty where status='1' and inactive<>'Active' order by reg_date")or die(mysqli_error());
+    $query=mysqli_query($con,"select * from faculty natural join dept where status='1' and inactive<>'Active' order by reg_date")or die(mysqli_error());
       while ($row=mysqli_fetch_array($query)){
         $id=$row['faculty_id'];
         $last=$row['faculty_last'];
@@ -90,7 +90,7 @@ include('../dist/includes/dbcon.php');
                       <tr>
                         <td><?php echo $last;?></td>
                         <td><?php echo $first;?></td>
-                        <td><?php echo $row['dept_code'];?></td>
+                        <td><?php echo $row['dept'];?></td>
                         <td><?php echo date("M d, Y h:i a",strtotime($date));?></td>
                        
                      

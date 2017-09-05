@@ -69,6 +69,7 @@
                         <th>First Name</th>
                         <th>Department</th>
                         <th>Registration Date</th>
+                        <th>Last Update</th>
                         <th>Status</th>
                         <th>Action</th>
                       </tr>
@@ -77,12 +78,13 @@
 <?php
 include('../dist/includes/dbcon.php');
 
-    $query=mysqli_query($con,"select * from faculty where status='1' order by reg_date")or die(mysqli_error());
+    $query=mysqli_query($con,"select * from faculty natural join dept where status='1' order by reg_date")or die(mysqli_error());
       while ($row=mysqli_fetch_array($query)){
         $id=$row['faculty_id'];
         $last=$row['faculty_last'];
         $date=$row['reg_date'];
         $first=$row['faculty_first'];
+        $update=$row['last_update'];
 ?>
 
                
@@ -171,8 +173,9 @@ include('../dist/includes/dbcon.php');
                       <tr>
                         <td><?php echo $last;?></td>
                         <td><?php echo $first;?></td>
-                        <td><?php echo $row['dept_code'];?></td>
+                        <td><?php echo $row['dept'];?></td>
                         <td><?php echo date("M d, Y h:i a",strtotime($date));?></td>
+                        <td><?php echo date("M d, Y h:i a",strtotime($update));?></td>
                         <td><?php echo $row['inactive'];?></td>
                         <td><button class="btn btn-primary" data-target="#approve<?php echo $id;?>" data-toggle="modal">
                                 Approve
@@ -191,6 +194,7 @@ include('../dist/includes/dbcon.php');
                         <th>First Name</th>
                         <th>Department</th>
                         <th>Registration Date</th>
+                        <th>Last Update</th>
                         <th>Action</th>
                       </tr>
                     </tfoot>
