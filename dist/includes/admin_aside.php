@@ -27,6 +27,11 @@
                 <i class="glyphicon glyphicon-lock"></i> <span>Users</span>
               </a>
             </li>
+             <li>
+              <a href="department.php">
+                <i class="glyphicon glyphicon-lock"></i> <span>Department</span>
+              </a>
+            </li>
            
             <li class="treeview">
               <a href="#">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2017 at 05:23 PM
+-- Generation Time: Sep 05, 2017 at 09:23 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -95,7 +95,22 @@ INSERT INTO `announcement` (`announcement_id`, `announcement`, `date_posted`) VA
 (12, 'vcc', '2017-07-08 12:02:00'),
 (18, 'No work tomorrow', '2017-07-08 14:35:00'),
 (19, 'This is a test', '2017-07-08 14:37:00'),
-(20, 'Holiday po tomorrow Fiesta is There will be no class There will be no class There will be no class There will be no classThere will be no classThere will be no class', '2017-07-08 14:38:00');
+(20, 'Holiday po tomorrow Fiesta is There will be no class There will be no class There will be no class There will be no classThere will be no classThere will be no class', '2017-07-08 14:38:00'),
+(21, 'This is a test motif', '2017-09-04 08:07:00'),
+(22, '2nd test', '2017-09-04 08:08:00'),
+(23, '3rd multiple', '2017-09-04 08:34:00'),
+(24, 'ssss', '2017-09-04 08:35:00'),
+(25, 'ccc', '2017-09-04 08:37:00'),
+(26, 'ddd', '2017-09-04 08:38:00'),
+(27, 'ffff', '2017-09-04 08:41:00'),
+(28, 'gtt', '2017-09-04 08:41:00'),
+(29, 'ggg', '2017-09-04 08:42:00'),
+(30, 'dff', '2017-09-04 08:44:00'),
+(31, 'fff', '2017-09-04 08:44:00'),
+(32, 'tt', '2017-09-04 08:44:00'),
+(33, '1233', '2017-09-04 08:47:00'),
+(34, '123', '2017-09-04 08:47:00'),
+(35, '333', '2017-09-04 08:56:00');
 
 -- --------------------------------------------------------
 
@@ -155,16 +170,18 @@ INSERT INTO `contact` (`contact_id`, `contact_name`, `contact_relation`, `contac
 
 CREATE TABLE `dept` (
   `dept_id` int(11) NOT NULL,
-  `dept_code` varchar(10) NOT NULL,
-  `dept_title` varchar(100) NOT NULL
+  `dept` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dept`
 --
 
-INSERT INTO `dept` (`dept_id`, `dept_code`, `dept_title`) VALUES
-(1, 'CIT', 'College of Industrial Technology\r\n');
+INSERT INTO `dept` (`dept_id`, `dept`) VALUES
+(1, 'TLE Department'),
+(2, 'Math Department'),
+(3, 'English Department'),
+(4, 'MAPEH Department');
 
 -- --------------------------------------------------------
 
@@ -295,16 +312,17 @@ CREATE TABLE `faculty` (
   `status` int(11) NOT NULL,
   `inactive` varchar(11) NOT NULL,
   `last_update` date NOT NULL,
-  `dept_code` varchar(11) NOT NULL
+  `dept_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `faculty`
 --
 
-INSERT INTO `faculty` (`faculty_id`, `faculty_last`, `faculty_first`, `faculty_middle`, `faculty_ext`, `faculty_pic`, `password`, `gender`, `civil`, `height`, `weight`, `res_address`, `res_zip`, `res_tel`, `perm_address`, `perm_zip`, `perm_tel`, `email`, `bday`, `contact`, `pob`, `citizenship`, `sss`, `tin`, `philhealth`, `gsis`, `pagibig`, `emp_no`, `blood_type`, `reg_status`, `reg_date`, `log`, `language`, `skills`, `status`, `inactive`, `last_update`, `dept_code`) VALUES
-(5, 'Jungco', 'Christy ', 'Torres', '', 'default.gif', '123', 'Female', 'Single', '154', '45', 'Brgy Busay Bago City', 6101, 'na', 'Brgy Busay Bago City', 6101, 'na', 'crissy@gmail.com', '1996-10-14', '09051914070', 'Bacolod City', 'Filipino', '323', '3232', '3232', '3232', '332323', '', 'B', 0, '2017-07-12', 3, '', '', 1, 'Inactive', '0000-00-00', 'CIT'),
-(7, 'Torres', 'Delilah', '', '', 'default.gif', '123', 'Female', 'Single', '2.3', '45', 'Brgy. Banago, Bacolod City', 6100, 'na', 'Brgy. Banago, Bacolod City', 6100, 'na', 'torres@yahoo.com', '1990-10-14', '09051914070', 'Silay City', 'Filipino', '123', '456', '789', '012', '234', '', 'A', 0, '2017-09-02', 2, '', '', 1, 'Active', '0000-00-00', 'COED');
+INSERT INTO `faculty` (`faculty_id`, `faculty_last`, `faculty_first`, `faculty_middle`, `faculty_ext`, `faculty_pic`, `password`, `gender`, `civil`, `height`, `weight`, `res_address`, `res_zip`, `res_tel`, `perm_address`, `perm_zip`, `perm_tel`, `email`, `bday`, `contact`, `pob`, `citizenship`, `sss`, `tin`, `philhealth`, `gsis`, `pagibig`, `emp_no`, `blood_type`, `reg_status`, `reg_date`, `log`, `language`, `skills`, `status`, `inactive`, `last_update`, `dept_id`) VALUES
+(5, 'Jungco', 'Christy ', 'Torres', '', 'default.gif', '123', 'Female', 'Single', '154', '45', 'Brgy Busay Bago City', 6101, 'na', 'Brgy Busay Bago City', 6101, 'na', 'crissy@gmail.com', '1996-10-14', '639177736230', 'Bacolod City', 'Filipino', '323', '3232', '3232', '3232', '332323', '', 'B', 0, '2017-07-12', 3, '', '', 1, 'Active', '0000-00-00', 1),
+(7, 'Torres', 'Delilah', '', '', 'default.gif', '123', 'Female', 'Single', '2.3', '45', 'Brgy. Banago, Bacolod City', 6100, 'na', 'Brgy. Banago, Bacolod City', 6100, 'na', 'torres@yahoo.com', '1990-10-14', '639177736230', 'Silay City', 'Filipino', '123', '456', '789', '012', '234', '', 'A', 0, '2017-09-02', 2, '', '', 1, 'Active', '0000-00-00', 2),
+(8, 'dada', 'dada', '', '', 'default.gif', '123', '', '', '', '', '', 0, '', '', 0, '', 'emoblazz@gmail.com1', '2017-01-01', '', '', '', '', '', '', '', '', '', '', 0, '2017-09-05', 0, '', '', 0, '', '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -783,7 +801,7 @@ ALTER TABLE `agency`
 -- AUTO_INCREMENT for table `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `announcement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `civil`
 --
@@ -798,7 +816,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT for table `dept`
 --
 ALTER TABLE `dept`
-  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `dept_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `educ`
 --
@@ -818,7 +836,7 @@ ALTER TABLE `event`
 -- AUTO_INCREMENT for table `faculty`
 --
 ALTER TABLE `faculty`
-  MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `faculty_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `family`
 --

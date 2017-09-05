@@ -22,24 +22,24 @@ include('includes/dbcon.php');
 				}
 			else
 			{
-					mysqli_query($con,"INSERT INTO faculty(faculty_last,faculty_first,faculty_pic,email,password,reg_date,bday,dept_code) VALUES('$last','$first','default.gif','$email','$pass','$date','$bday1','$dept')")or die(mysqli_error($con));
+					mysqli_query($con,"INSERT INTO faculty(faculty_last,faculty_first,faculty_pic,email,password,reg_date,bday,dept_id) VALUES('$last','$first','default.gif','$email','$pass','$date','$bday1','$dept')")or die(mysqli_error($con));
 				
 
 						 ini_set( 'display_errors', 1 );
     
-						    error_reporting( E_ALL );
+						    error_reporting(E_ALL);
 						    
-						    $from = "sample@yahoo.com";
+						    $from = "info@dlnhs.com";
 						    
-						    $to = "emoblazz@gmail.com";
+						    $to = "$email";
 						    
 						    $subject = "Web-Based Faculty IS Registration Details";
 						    
 						    $message = "Hi!
 						    Thank you for registering to Web-Based Faculty Information System. Below are your registration details.
-						    Username: 
-						    Password: 
-						    Email: 
+						    Email: $email
+						    Password: $password
+
 
 
 						    Thanks,

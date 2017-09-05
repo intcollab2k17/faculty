@@ -146,7 +146,7 @@ include('../dist/includes/dbcon.php');
                       <div class="modal-body">
                       <form class="form-horizontal" method="post" action="status_update.php">
                         <input type="hidden" name="id" value="<?php echo $id;?>">
-                        <p>Accept registration request of <?php echo $first." ".$last;?></p> 
+                       
                         <div class='form-group'> 
                           <label class='control-label'>Status</label> 
                           <select placeholder='Status' class='form-control' name='status'> 

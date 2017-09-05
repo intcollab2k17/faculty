@@ -72,7 +72,7 @@
                   $query2=mysqli_query($con,"select * from dept")or die(mysqli_error($con));
                       while($row2=mysqli_fetch_array($query2)){
                 ?>
-                      <option value="<?php echo $row2['dept_code'];?>"><?php echo $row2['dept_title'];?></option>
+                      <option value="<?php echo $row2['dept_id'];?>"><?php echo $row2['dept'];?></option>
                 <?php }?>
                 </select>
                       </div>
@@ -117,6 +117,7 @@
                       <button type="submit" id="register-submit-btn" class="btn blue pull-right">
                       Sign Up <i class="m-icon-swapright m-icon-white"></i>
                       </button>
+
                     </div>
                   </form>
                   <!-- END REGISTRATION FORM -->
@@ -159,7 +160,21 @@
                       
                     </form>
                     <!-- END LOGIN FORM -->
-                   
+                   <!-- BEGIN FORGOT PASSWORD FORM -->
+                  <form class="forget-form" action="reset.php" method="post">
+                    <h3>Forget Password ?</h3>
+                    <p>
+                       Enter your e-mail address below to reset your password.
+                    </p>
+                    <div class="form-group">
+                      <input class="form-control placeholder-no-fix" type="text" autocomplete="off" placeholder="Email" name="email"/>
+                    </div>
+                    <div class="form-actions">
+                      <a href="index.php" id="back-btn" class="btn btn-default">Back</a>
+                      <button type="submit" class="btn btn-success uppercase pull-right">Submit</button>
+                    </div>
+                  </form>
+                  <!-- END FORGOT PASSWORD FORM -->
                 </div>
               </div>
             </div>
