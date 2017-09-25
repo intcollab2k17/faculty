@@ -42,6 +42,7 @@
                 <li><a href="inactive.php"><i class="glyphicon glyphicon-stats"></i> Faculty (Inactive)</a></li>
                 <li><a href="active.php"><i class="glyphicon glyphicon-stats"></i> Faculty (Active)</a></li>
                 <li><a href="statistics.php"><i class="glyphicon glyphicon-stats"></i> Statistic By Department</a></li>
+                <li><a href="updated.php"><i class="glyphicon glyphicon-calendar"></i> Updated PDS</a></li>
               </ul>
             </li>
           </ul>

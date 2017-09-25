@@ -177,10 +177,7 @@ include('../dist/includes/dbcon.php');
                         <td><?php echo date("M d, Y h:i a",strtotime($date));?></td>
                         <td><?php echo date("M d, Y h:i a",strtotime($update));?></td>
                         <td><?php echo $row['inactive'];?></td>
-                        <td><button class="btn btn-primary" data-target="#approve<?php echo $id;?>" data-toggle="modal">
-                                Approve
-                            </button>
-                         <button class="btn btn-danger" data-target="#del<?php echo $id;?>" data-toggle="modal">Deny</button>
+                        <td>
                          <button class="btn btn-success" data-target="#status<?php echo $id;?>" data-toggle="modal">Change Status</button>
                          <a href="pds.php?id=<?php echo $id;?>" class="btn btn-warning">Print</a>
             </td>

@@ -28,6 +28,11 @@
 <link href="../assets/admin/layout3/css/custom.css" rel="stylesheet" type="text/css">
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>
+<style type="text/css">
+	tr{
+		height: 50px
+	}
+</style>
 <script>
 jQuery(document).ready(function() {       
    // initiate layout and plugins

@@ -60,7 +60,7 @@
 	<tr>
 		<td colspan="5"><?php echo $rowe['eligibility'];?></td>
 		<td><?php echo $rowe['rating'];?></td>
-		<td colspan="2"><?php echo $rowe['date_taken'];?></td>
+		<td colspan="2"><?php echo date("m/d/Y",strtotime($rowe['date_taken']));?></td>
 		<td colspan="3"><?php echo $rowe['place'];?></td>
 		<td><?php echo $rowe['licenseno'];?></td>
 		<td><?php if ($rowe['validity']=='0000-00-00') echo "";else echo $rowe['validity'];?></td>

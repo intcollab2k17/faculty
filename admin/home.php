@@ -108,7 +108,32 @@ include('../dist/includes/dbcon.php');
         </div>
       </div>
  </div>
-               <!--end of modal-->   
+               <!--end of modal--> 
+<div id="del<?php echo $id;?>" class="modal modal-primary fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">Deny Faculty Request</h4>
+                      </div>
+                      <div class="modal-body">
+                      <form class="form-horizontal" method="post" action="deny.php">
+                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                        <p>Deny registration request of <?php echo  $first." ".$last;?>?</p> 
+                                           
+                                    </div>    
+                                    <!--end of modal body-->
+                                    <div class="modal-footer">
+                                      <button type="submit" name="del" class="btn btn-primary">Yes</button>
+                                      <button type="button" class="btn btn-default" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                    </div>
+                      </div>
+                      <!--end of modal content-->
+                </form>
+        </div>
+      </div>
+ </div>
+               <!--end of modal-->                   
                           
                       <tr>
                         <td><?php echo $last;?></td>
@@ -150,7 +175,7 @@ include('../dist/includes/dbcon.php');
     $id=$_POST['id'];
 
       // sending query
-      mysqli_query($con,"update faculty set status='1' where faculty_id='$id'")or die(mysqli_error($con));  
+      mysqli_query($con,"update faculty set status='1',inactive='Active' where faculty_id='$id'")or die(mysqli_error($con));  
       
     }
     ?>

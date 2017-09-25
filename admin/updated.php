@@ -1,6 +1,6 @@
 <?php session_start();
       if(empty($_SESSION['id'])):
-      header('Location:index.php');
+      header('Location:../index.php');
       endif;
 ?>
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><?php include('../dist/includes/title.php');?> | faculty Students</title>
+    <title><?php include('../dist/includes/title.php');?> | Faculty</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -24,6 +24,9 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <style type="text/css">
+      
+    </style>
 
   </head>
   <body class="hold-transition skin-blue sidebar-mini">
@@ -43,58 +46,61 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Import faculty Students
-           
+            Faculty
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"> Home</a></li>
-            <li class="active">faculty Students</li>
+            <li class="active">Updated PDS Report</li>
           </ol>
         </section>
 
         <!-- Main content -->
         <section class="content">
           <div class="row">
-            <div class="col-xs-12">
+            <div class="col-md-12">
               
 
               <div class="box">
                 <div class="box-header">
                 </div><!-- /.box-header -->
                 <div class="box-body">
-                  <form method="post" enctype="multipart/form-data">
-                      <p style="font-size:16px;line-height:34px;">Please follow this format to be able to upload successfully. Column Names should be <b>lastname, firstname, middlename, birthday,course,major id, sy</b> respectively. Birthday format shoud follow this format <b>yyyy/mm/dd</b>. File extension should be in <b>CSV</b> format</p>
-                      <input type="file" name="image" required>
-                      <input type="submit" name="import" value="Import" class="btn btn-primary">
-                  </form>         
-                </div><!-- /.box-body -->
+                  <div id="graph"></div>
+                  <table id="" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                        <th colspan="4"><h3 style="text-align: center;">Updated PDS</th>
+                      </tr>
+                      <tr>
+                        <th>Month</th>
+                        <th>Count</th>
+                      </tr>
+                    </thead>
+                    <tbody>
 <?php
-if (isset($_POST['import'])) 
-{
-include('includes/dbcon.php');
-  if (is_uploaded_file($_FILES['image']['tmp_name'])) {
-    echo "<h1>" . "File ". $_FILES['image']['name'] ." uploaded successfully." . "</h1>";
-    echo "<h2>Displaying contents:</h2>";
-    readfile($_FILES['image']['tmp_name']);
-  }
+include('../dist/includes/dbcon.php');
+    $month=date("m");
+    $year=date("Y");
+    $query=mysqli_query($con,"select COUNT(*) as count,DATE_FORMAT(last_update,'%b') as month from faculty where YEAR(last_update)='$year' and (inactive='Active' and status='1') group by MONTH(last_update)")or die(mysqli_error());
+      while ($row=mysqli_fetch_array($query)){
+       
+        $month=$row['month'];
+        $count=$row['count'];
+?>
 
-  //Import uploaded file to Database
-  $handle = fopen($_FILES['image']['tmp_name'], "r");
-
-  while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-    mysqli_query($con,"INSERT into faculty(faculty_last,faculty_first,faculty_middle,bday,course,major_id,sy) values('$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]')");
     
-    }
+                      <tr>
+                        <td><?php echo $month;?></td>
+                        <td><?php echo $count;?></td>
+                        
 
-  fclose($handle);
-
-  //print "Import done";
-  echo "<script type='text/javascript'>alert('Successfully imported a CSV file!');</script>";
-  echo "<script>document.location='faculty.php'</script>";
-  //view upload form
-}
-
-?>                
+                     
+                      </tr>
+                      
+<?php }?>                     
+                    </tbody>
+                   
+                  </table>
+                </div><!-- /.box-body -->
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -106,7 +112,6 @@ include('includes/dbcon.php');
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
-
 
     <!-- jQuery 2.1.4 -->
     <script src="../plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -137,5 +142,71 @@ include('includes/dbcon.php');
         });
       });
     </script>
+    <script src="highcharts.js"></script> <!-- chart -->
+<script src="exporting.js"></script> <!-- chart-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+      var options = {
+              chart: {
+                  renderTo: 'graph',
+                  type: 'column',
+                  marginRight: 10,
+                  marginBottom: 25
+                
+              },
+              title: {
+                  text: '',
+                  x: -20 //center
+              },
+              subtitle: {
+                  text: '',
+                  x: -10
+              },
+              xAxis: {
+                  categories: []
+              },
+              yAxis: {
+                  
+                  title: {
+                      text: 'Total Monthly Reservations'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                  }]
+              },
+              tooltip: {
+                  formatter: function() {
+                          return '<b>'+ this.series.name +'</b><br/>'+  Highcharts.numberFormat(this.y, 0)
+                          this.x +': '+ this.y
+                          
+                  ;
+                  }
+              },
+              legend: {
+                  layout: 'vertical',
+                  align: 'right',
+                  verticalAlign: 'top',
+                  x: 0,
+                  y: 100,
+                  borderWidth: 0
+              },
+              series: []
+          }
+          
+          $.getJSON("data_updated.php", function(json) {
+      options.xAxis.categories = json[0]['name'];
+            options.series[0] = json[1];
+            //options.series[1] = json[2];
+            
+            
+            
+            chart = new Highcharts.Chart(options);
+          });
+      });
+    </script>
   </body>
 </html>
+
